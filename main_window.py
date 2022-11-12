@@ -1,5 +1,5 @@
 import sys
-from PyQt5.QtWidgets import QWidget, QMessageBox, QApplication
+from PyQt5.QtWidgets import QWidget, QMessageBox, QApplication, QFileDialog
 
 
 class Example(QWidget):
@@ -28,9 +28,15 @@ class Example(QWidget):
         else:
             event.ignore()
 
+    def get_directory(self):
+        way = QFileDialog.getExistingDirectory(self, "Выбрать папку", ".")  
+        print(way)    
+        return way    
+
 
 if __name__ == '__main__':
 
     app = QApplication(sys.argv)
     ex = Example()
+    print(ex.get_directory())
     sys.exit(app.exec_())
