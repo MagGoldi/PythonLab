@@ -11,7 +11,7 @@ def run_1(path_to_csv: str=os.path.join("C:/", "PYTHON", "PythonLab2-1", "File_f
     path_fol, path_sc1 = "File_folder", "File_folder/scrnipt_1" 
     make_dir(path_fol, path_sc1) 
     list1 = [] 
-    with open(path_to_csv=os.path.join("C:/", "PYTHON", "PythonLab2-1", "File_folder", 
+    with open(path_to_csv=os.path.join("C:/", "PYTHON", "PythonLab2-1", "File_folder", "DataSet", 
     "dataset.csv", 'r', newline='')) as csvfile: 
         file_reader = csv.reader(csvfile) 
         for row in file_reader: 

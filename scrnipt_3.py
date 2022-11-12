@@ -51,7 +51,7 @@ def run_3(path_to_csv: str=os.path.join("C:/", "PYTHON", "PythonLab2-1", "File_f
     path_sc3 = "File_folder/scrnipt_3"
     make_dir(path_sc3)
     set1 = set()
-    with open(path_to_csv=os.path.join("C:/", "PYTHON", "PythonLab2-1", "File_folder",
+    with open(path_to_csv=os.path.join("C:/", "PYTHON", "PythonLab2-1", "File_folder", "DataSet",
      'dataset.csv', 'r', newline='', encoding="utf-8")) as csvfile:
         file_reader = csv.reader(csvfile)
         for row in file_reader:
@@ -59,7 +59,7 @@ def run_3(path_to_csv: str=os.path.join("C:/", "PYTHON", "PythonLab2-1", "File_f
     set1 = sorted(list(set1), reverse=True)
     n = len(set1)
 
-    with open(path_to_csv=os.path.join("C:/", "PYTHON", "PythonLab2-1", "File_folder",
+    with open(path_to_csv=os.path.join("C:/", "PYTHON", "PythonLab2-1", "File_folder", "DataSet",
      'dataset.csv', 'r', newline='', encoding="utf-8")) as csvfile:
         file_reader = list(csv.reader(csvfile))
         all_data = []
@@ -81,6 +81,9 @@ def run_3(path_to_csv: str=os.path.join("C:/", "PYTHON", "PythonLab2-1", "File_f
                     all_data.append(row)
 
     print("\nscript_3 has finished working\n")
+
+
+  
 
 
   

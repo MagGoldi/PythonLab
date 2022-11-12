@@ -30,7 +30,7 @@ def run_2(path_to_csv: str=os.path.join("C:/", "PYTHON", "PythonLab2-1", "File_f
     make_dir(path_to_csv, path_sc2)
     set1 = set()
     list1_years = []
-    with open(path_to_csv=os.path.join("C:/", "PYTHON", "PythonLab2-1", "File_folder",
+    with open(path_to_csv=os.path.join("C:/", "PYTHON", "PythonLab2-1", "File_folder", "DataSet",
      'dataset.csv', 'r', newline='', encoding="utf-8")) as csvfile:
         file_reader = csv.reader(csvfile)
         for row in file_reader:
@@ -38,7 +38,7 @@ def run_2(path_to_csv: str=os.path.join("C:/", "PYTHON", "PythonLab2-1", "File_f
     set1 = sorted(list(set1), reverse=True)
     n = len(set1)
 
-    with open(path_to_csv=os.path.join("C:/", "PYTHON", "PythonLab2-1", "File_folder",
+    with open(path_to_csv=os.path.join("C:/", "PYTHON", "PythonLab2-1", "File_folder", "DataSet",
      'dataset.csv', 'r', newline='', encoding="utf-8")) as csvfile:
         file_reader = list(csv.reader(csvfile))
         for i in range(n):
