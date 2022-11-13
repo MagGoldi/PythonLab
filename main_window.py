@@ -5,6 +5,13 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QMessageBox
 from PyQt5.QtGui import QPixmap, QFont, QIcon
 from PyQt5.QtCore import Qt
 
+
+import scrnipt_1
+import scrnipt_2
+import scrnipt_3
+import scrnipt_4
+
+
 class Window(QMainWindow):
 
     def __init__(self):
@@ -22,10 +29,8 @@ class Window(QMainWindow):
         self.setWindowTitle("Данные о")
         self.background = QLabel(self)
         self.fire = QLabel(self)
-       # self.background = QPixmap('cat_with_lighting.jpeg')
+       #картинка
         self.background.setGeometry(0, 0, 1007, 925)
-        self.background.setPixmap(QPixmap('cat_with_lighting.jpeg'))
-
 
         self.main_text = QtWidgets.QLabel(self)
         self.main_text.setText("Создание и выбор аннотаций")
@@ -57,6 +62,7 @@ class Window(QMainWindow):
         self.botton3.clicked.connect(self.data_date)
 
     def hidden_text(self):
+        self.text = QtWidgets.QPushButton(self)
         self.text.setText("Введите дату дд/мм/гггг")
         self.text.move(735, 120)
         self.text.adjustSize()
@@ -65,18 +71,21 @@ class Window(QMainWindow):
         self.fire.setPixmap(QPixmap('pngwing.com.png'))
         self.fire.hide()   
 
-        # self.calendar.setText("hjh")
+
+        self.dateEdit = QtWidgets.QPushButton(self)
         self.dateEdit.show()
         self.dateEdit.move(760, 136)
-        # self.dateEdit.setFixedWidth(200)
 
+
+        self.weather_text = QtWidgets.QPushButton(self)
         self.weather_text.setText("Данные")
         self.weather_text.move(135, 310)
-        # self.weather_text.setFixedWidth(400)
+
         self.weather_text.adjustSize()
         self.weather_text.setStyleSheet("color: rgb(0, 0, 0); font-size: 18px;")
         self.weather_text.hide()
 
+        self.btn_weather = QtWidgets.QPushButton(self)
         self.btn_weather.show()
         self.btn_weather.setText("Получить данные")
         self.btn_weather.setFixedWidth(200)
@@ -84,17 +93,17 @@ class Window(QMainWindow):
         self.btn_weather.clicked.connect(self.data_of_weather)
 
     def data_date(self) -> None:
-        separation_by_date_and_data.main()
+        scrnipt_1.run_1()
         self.flag = 1
         self.hidden_text()
 
     def week(self) -> None:
-        separation_on_weeks.main()
+        scrnipt_3.run_3()
         self.flag = 2
         self.hidden_text()
 
     def year(self) -> None:
-        separation_on_year.main()
+        scrnipt_2.run_2()
         self.flag = 3
         self.hidden_text()
 
@@ -103,19 +112,19 @@ class Window(QMainWindow):
         self.fire.show()
         self.weather_text.show()
         if self.flag == 1:
-            text = search_with_date.search_in_data_and_date(
-                search_with_date.day(self.dateEdit.dateTime().toString("dd-MM-yyyy"))
+            text = scrnipt_4.work_1(
+                scrnipt_4.work_0(self.dateEdit.dateTime().toString("dd-MM-yyyy"))
             )
         else:
             if self.flag == 2:
-                text = search_with_date.search_in_week_fast(
-                    search_with_date.day(
+                text = scrnipt_4.work_3(
+                    scrnipt_4.work_0(
                         self.dateEdit.dateTime().toString("dd-MM-yyyy")
                     )
                 )
             else:
-                text = search_with_date.search_in_year(
-                    search_with_date.day(
+                text = scrnipt_4.work_2(
+                    scrnipt_4.work_0(
                         self.dateEdit.dateTime().toString("dd-MM-yyyy")
                     )
                 )
@@ -125,7 +134,7 @@ class Window(QMainWindow):
 
 
 
-    def closeEvent(self, event):
+    """def closeEvent(self, event):
 
         reply = QMessageBox.question(self, 'Message',
             "Are you sure to quit?", QMessageBox.Yes |
@@ -134,7 +143,7 @@ class Window(QMainWindow):
         if reply == QMessageBox.Yes:
             event.accept()
         else:
-            event.ignore()
+            event.ignore()"""
 
     """def get_directory(self):
         way = QFileDialog.getExistingDirectory(self, "Выбрать папку", ".")  
