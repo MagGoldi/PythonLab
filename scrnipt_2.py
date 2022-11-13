@@ -10,7 +10,7 @@ import re
 
 def make_dir(path_sc2: str) -> None:
     '''Принимает имя пути, если файла нет создает'''
-    if not os.path.isdir( path_sc2):
+    if not os.path.isdir(path_sc2):
         os.mkdir(path_sc2)
 
 
@@ -18,28 +18,26 @@ def work_file(date_1: str, date_2: str, list1_years: list, path_to_csv: str) -> 
     '''Принимает имя пути, записывает в список'''
     name_file = path_to_csv + '/scrnipt_2/' + date_1 + "_" + date_2 + ".csv"
     print("create file: ", name_file)
-    with open(name_file, 'w', newline='', encoding="utf-8") as namefile:
+    with open(name_file, 'w', newline='', encoding='utf-8') as namefile:
         writer = csv.writer(namefile)
         for i in range(len(list1_years)):
             writer.writerow(list1_years[i])
 
 
-def run_2(path_to_csv: str=os.path.join("C:/", "PYTHON", "PythonLab2-1", "File_folder")) -> None:
+def run_2(path_to_csv: str=os.path.join("C:/", "PYTHON", "PythonLab2", "File_folder")) -> None:
     '''Основная функция работы скрипта'''
-    path_sc2 = "File_folder/scrnipt_2"
-    make_dir(path_to_csv, path_sc2)
+    path_sc2 = path_to_csv + "/scrnipt_2"
+    make_dir(path_sc2)
     set1 = set()
     list1_years = []
-    with open(path_to_csv=os.path.join("C:/", "PYTHON", "PythonLab2-1", "File_folder", "DataSet",
-     'dataset.csv', 'r', newline='', encoding="utf-8")) as csvfile:
+    with open(path_to_csv + '/DataSet/dataset.csv', 'r',  encoding='utf-8') as csvfile:
         file_reader = csv.reader(csvfile)
         for row in file_reader:
             set1.add(row[0][:4])
     set1 = sorted(list(set1), reverse=True)
     n = len(set1)
 
-    with open(path_to_csv=os.path.join("C:/", "PYTHON", "PythonLab2-1", "File_folder", "DataSet",
-     'dataset.csv', 'r', newline='', encoding="utf-8")) as csvfile:
+    with open(path_to_csv + '/DataSet/dataset.csv', 'r', encoding='utf-8') as csvfile:
         file_reader = list(csv.reader(csvfile))
         for i in range(n):
             for j in range(len(file_reader)):
@@ -51,4 +49,3 @@ def run_2(path_to_csv: str=os.path.join("C:/", "PYTHON", "PythonLab2-1", "File_f
             list1_years = []
 
     print("\nscript_2 has finished working\n")
-    
