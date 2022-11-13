@@ -1,9 +1,12 @@
 import sys
 import PyQt5
-from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QMessageBox
+from PyQt5 import QtWidgets, QtGui
+from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QMessageBox, QLineEdit
 from PyQt5.QtGui import QPixmap, QFont, QIcon
 from PyQt5.QtCore import Qt
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
 
 
 import scrnipt_1
@@ -16,7 +19,6 @@ class Window(QMainWindow):
 
     def __init__(self):
         super().__init__()
-
         self.initUI()
 
 
@@ -24,18 +26,19 @@ class Window(QMainWindow):
 
         super(Window, self).__init__()
 
-        self.setGeometry(300, 250, 1007, 925)
-        self.setFixedSize(1007, 925)
-        self.setWindowTitle("Данные о")
+        self.setGeometry(800, 300, 1000, 900)
+        self.setFixedSize(920, 800)
+        self.setWindowTitle("Weather data")
         self.background = QLabel(self)
         self.fire = QLabel(self)
-       #картинка
         self.background.setGeometry(0, 0, 1007, 925)
+        self.background.setPixmap(QPixmap("File_folder/bluee.png"))
 
-        self.main_text = QtWidgets.QLabel(self)
-        self.main_text.setText("Создание и выбор аннотаций")
-        self.main_text.move(725, 10)
-        self.main_text.adjustSize()
+        self.base = QtWidgets.QLabel(self)
+        self.base.setFont(QtGui.QFont("Times", 14, QtGui.QFont.Bold))
+        self.base.setText("Создание и выбор аннотаций")
+        self.base.move(220, 10) 
+        self.base.adjustSize()
 
         self.folderpath_dataset = ""
         while self.folderpath_dataset == "":
@@ -43,23 +46,30 @@ class Window(QMainWindow):
                 self, "Please select folder of dataset"
             )
 
-        self.botton1 = QtWidgets.QPushButton(self)
-        self.botton1.setText("Разделение на года")
-        self.botton1.setFixedWidth(300)
-        self.botton1.move(670, 30)
-        self.botton1.clicked.connect(self.year)
+        self.b1 = QtWidgets.QPushButton(self)
+        self.b1.setText("Разделение на года")   #добавить подсветку под кнопками
+        self.b1.setFixedSize(400, 50)
+        self.b1.move(275, 250)
+        self.b1.clicked.connect(self.year)
 
-        self.botton2 = QtWidgets.QPushButton(self)
-        self.botton2.setText("Разделение на недели")
-        self.botton2.setFixedWidth(300)
-        self.botton2.move(670, 60)
-        self.botton2.clicked.connect(self.week)
+        self.b2 = QtWidgets.QPushButton(self)
+        self.b2.setText("Разделение на недели")
+        self.b2.setFixedSize(400, 50)
+        self.b2.move(275, 300)
+        self.b2.clicked.connect(self.week)
 
-        self.botton3 = QtWidgets.QPushButton(self)
-        self.botton3.setText("Разделение на даты и данные")
-        self.botton3.setFixedWidth(300)
-        self.botton3.move(670, 90)
-        self.botton3.clicked.connect(self.data_date)
+        self.b3 = QtWidgets.QPushButton(self)
+        self.b3.setText("Разделение на даты и данные")
+        self.b3.setFixedSize(400, 50)
+        self.b3.move(275, 350)
+        self.b3.clicked.connect(self.data_date)
+
+        self.b4 = QtWidgets.QPushButton(self)
+        self.b4.setText("Ввести дату")
+        self.b4.setFixedSize(400, 50)
+        self.b4.move(275, 500)
+        self.b4.clicked.connect(self.input_data)
+        
 
     def hidden_text(self):
         self.text = QtWidgets.QPushButton(self)
@@ -71,11 +81,9 @@ class Window(QMainWindow):
         self.fire.setPixmap(QPixmap('pngwing.com.png'))
         self.fire.hide()   
 
-
         self.dateEdit = QtWidgets.QPushButton(self)
         self.dateEdit.show()
         self.dateEdit.move(760, 136)
-
 
         self.weather_text = QtWidgets.QPushButton(self)
         self.weather_text.setText("Данные")
@@ -94,8 +102,8 @@ class Window(QMainWindow):
 
     def data_date(self) -> None:
         scrnipt_1.run_1()
-        self.flag = 1
-        self.hidden_text()
+        #self.flag = 1
+        #self.hidden_text()
 
     def week(self) -> None:
         scrnipt_3.run_3()
@@ -107,34 +115,10 @@ class Window(QMainWindow):
         self.flag = 3
         self.hidden_text()
 
-    def data_of_weather(self) -> None:
-        text = ""
-        self.fire.show()
-        self.weather_text.show()
-        if self.flag == 1:
-            text = scrnipt_4.work_1(
-                scrnipt_4.work_0(self.dateEdit.dateTime().toString("dd-MM-yyyy"))
-            )
-        else:
-            if self.flag == 2:
-                text = scrnipt_4.work_3(
-                    scrnipt_4.work_0(
-                        self.dateEdit.dateTime().toString("dd-MM-yyyy")
-                    )
-                )
-            else:
-                text = scrnipt_4.work_2(
-                    scrnipt_4.work_0(
-                        self.dateEdit.dateTime().toString("dd-MM-yyyy")
-                    )
-                )
-        self.weather_text.setText(text)
-       # self.weather_text.move(515, 230)
-        self.weather_text.setFixedWidth(400)
+    def input_data(self) -> None:
+        pass 
 
-
-
-    """def closeEvent(self, event):
+    def closeEvent(self, event):
 
         reply = QMessageBox.question(self, 'Message',
             "Are you sure to quit?", QMessageBox.Yes |
@@ -143,13 +127,7 @@ class Window(QMainWindow):
         if reply == QMessageBox.Yes:
             event.accept()
         else:
-            event.ignore()"""
-
-    """def get_directory(self):
-        way = QFileDialog.getExistingDirectory(self, "Выбрать папку", ".")  
-        print(way)    
-        return way"""  
-
+            event.ignore()
 
 def application():
     app = QApplication(sys.argv)
