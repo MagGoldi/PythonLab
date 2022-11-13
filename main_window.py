@@ -69,6 +69,8 @@ class Window(QMainWindow):
         self.b4.setFixedSize(400, 50)
         self.b4.move(275, 500)
         self.b4.clicked.connect(self.input_data)
+
+        
         
 
     def hidden_text(self):
@@ -100,6 +102,17 @@ class Window(QMainWindow):
         self.btn_weather.move(720, 170)
         self.btn_weather.clicked.connect(self.data_of_weather)
 
+        self.btn = QPushButton('Dialog', self)
+        self.btn.move(300, 300)
+        self.btn.clicked.connect(self.input_data)
+
+        self.le = QLineEdit(self)
+        self.le.move(150, 22)
+
+        self.setGeometry(300, 300, 290, 150)
+        self.setWindowTitle('Input data')
+        self.show()
+
     def data_date(self) -> None:
         scrnipt_1.run_1()
         #self.flag = 1
@@ -116,7 +129,11 @@ class Window(QMainWindow):
         self.hidden_text()
 
     def input_data(self) -> None:
-        pass 
+        text, ok = QInputDialog.getText(self, 'Data',
+            'Enter data:')
+
+        if ok:
+            self.le.setText(str(text))
 
     def closeEvent(self, event):
 
