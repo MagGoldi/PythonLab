@@ -7,7 +7,7 @@ def make_dir(path_fol: str, path_sc1: str) -> None:
     if not os.path.isdir(path_fol): os.mkdir(path_fol) 
     if not os.path.isdir(path_sc1): os.mkdir(path_sc1)
 
-def run_1(path_to_csv: str=os.path.join("C:/", "PYTHON", "PythonLab2", "File_folder")) -> None:
+def run_1(path_to_csv: str=os.path.join("C:/", "PYTHON", "PythonLab3", "File_folder")) -> None:
     '''Основная функция работы скрипта''' 
     path_fol, path_sc1 = "File_folder", "File_folder/scrnipt_1" 
     make_dir(path_fol, path_sc1) 

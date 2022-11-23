@@ -70,63 +70,18 @@ class Window(QMainWindow):
         self.b4.move(275, 500)
         self.b4.clicked.connect(self.input_data)
 
-        
-        
-
-    def hidden_text(self):
-        self.text = QtWidgets.QPushButton(self)
-        self.text.setText("Введите дату дд/мм/гггг")
-        self.text.move(735, 120)
-        self.text.adjustSize()
-
-        self.fire.setGeometry(0, 0, 686, 520)
-        self.fire.setPixmap(QPixmap('pngwing.com.png'))
-        self.fire.hide()   
-
-        self.dateEdit = QtWidgets.QPushButton(self)
-        self.dateEdit.show()
-        self.dateEdit.move(760, 136)
-
-        self.weather_text = QtWidgets.QPushButton(self)
-        self.weather_text.setText("Данные")
-        self.weather_text.move(135, 310)
-
-        self.weather_text.adjustSize()
-        self.weather_text.setStyleSheet("color: rgb(0, 0, 0); font-size: 18px;")
-        self.weather_text.hide()
-
-        self.btn_weather = QtWidgets.QPushButton(self)
-        self.btn_weather.show()
-        self.btn_weather.setText("Получить данные")
-        self.btn_weather.setFixedWidth(200)
-        self.btn_weather.move(720, 170)
-        self.btn_weather.clicked.connect(self.data_of_weather)
-
-        self.btn = QPushButton('Dialog', self)
-        self.btn.move(300, 300)
-        self.btn.clicked.connect(self.input_data)
-
-        self.le = QLineEdit(self)
-        self.le.move(150, 22)
-
-        self.setGeometry(300, 300, 290, 150)
-        self.setWindowTitle('Input data')
-        self.show()
 
     def data_date(self) -> None:
         scrnipt_1.run_1()
-        #self.flag = 1
-        #self.hidden_text()
+
 
     def week(self) -> None:
         scrnipt_3.run_3()
-        self.flag = 2
-        self.hidden_text()
+
 
     def year(self) -> None:
         scrnipt_2.run_2()
-        self.flag = 3
-        self.hidden_text()
+
 
     def input_data(self) -> None:
         text, ok = QInputDialog.getText(self, 'Data',

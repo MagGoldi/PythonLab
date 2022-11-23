@@ -24,7 +24,7 @@ class Iterator:
             raise StopIteration
 
 
-def run_5(path_to_csv: str=os.path.join("C:/", "PYTHON", "PythonLab2", "File_folder")) -> None:
+def run_5(path_to_csv: str=os.path.join("C:/", "PYTHON", "PythonLab3", "File_folder")) -> None:
     '''Основная функция работы скрипта'''
     file_name = path_to_csv + "/scrnipt_2/20220901_20220130.csv"
     s_iter1 = Iterator(file_name)

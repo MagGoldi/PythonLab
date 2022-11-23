@@ -96,7 +96,7 @@ def work_3(date: datetime.date, path_to_csv: str) -> None:
         return None
 
 
-def run_4(path_to_csv: str=os.path.join("C:/", "PYTHON", "PythonLab2", "File_folder")) -> None:
+def run_4(path_to_csv: str=os.path.join("C:/", "PYTHON", "PythonLab3", "File_folder")) -> None:
     '''Основная функция работы скрипта'''
     date = datetime.date(2022, 9, 7)
     work_0(date, path_to_csv)

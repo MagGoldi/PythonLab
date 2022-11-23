@@ -24,7 +24,7 @@ def work_file(date_1: str, date_2: str, list1_years: list, path_to_csv: str) -> 
             writer.writerow(list1_years[i])
 
 
-def run_2(path_to_csv: str=os.path.join("C:/", "PYTHON", "PythonLab2", "File_folder")) -> None:
+def run_2(path_to_csv: str=os.path.join("C:/", "PYTHON", "PythonLab3", "File_folder")) -> None:
     '''Основная функция работы скрипта'''
     path_sc2 = path_to_csv + "/scrnipt_2"
     make_dir(path_sc2)
