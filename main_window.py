@@ -1,5 +1,6 @@
 import sys
 import PyQt5
+import datetime
 from PyQt5 import QtWidgets, QtGui
 from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QMessageBox, QLineEdit
 from PyQt5.QtGui import QPixmap, QFont, QIcon
@@ -14,6 +15,10 @@ import scrnipt_2
 import scrnipt_3
 import scrnipt_4
 
+class Window2(QMainWindow):                           # <===
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("Window22222")
 
 class Window(QMainWindow):
 
@@ -73,22 +78,34 @@ class Window(QMainWindow):
 
     def data_date(self) -> None:
         scrnipt_1.run_1()
+        QMessageBox.about(self, "data_date", "Данные отсорированны")
 
 
     def week(self) -> None:
         scrnipt_3.run_3()
+        QMessageBox.about(self, "week", "Данные отсорированны")
 
 
     def year(self) -> None:
         scrnipt_2.run_2()
+        QMessageBox.about(self, "year", "Данные отсорированны")
 
 
     def input_data(self) -> None:
         text, ok = QInputDialog.getText(self, 'Data',
-            'Enter data:')
+            'Enter the data in the format dd.mm.yyyy:')
 
         if ok:
-            self.le.setText(str(text))
+            if (0<=int(text[0:2])<=31 and 0<=int(text[3:5])<=12 and 0<=int(text[6:10])<=3000):
+                date = datetime.date(int(text[6:10]), int(text[3:5]), int(text[0:2]))
+                self.w = Window2()
+                self.w = QtWidgets.QLabel(self)
+                
+                self.w.show()
+                #self.hide()
+            else: 
+                QMessageBox.about(self, "Внимание", "Вводите реальные даты...")
+
 
     def closeEvent(self, event):
 
