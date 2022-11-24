@@ -27,19 +27,18 @@ def next(path_to_csv: str, count: int) -> Optional[List[str]]: # Union[None, Lis
             #print(*file_reader[count])
 
 
-def work_0(date: datetime.date,  path_to_csv: str) -> None:
+def work_0(date: datetime.date,  path_to_csv: str=os.path.join("C:/", "PYTHON", "PythonLab3", "File_folder")) -> str:
     "принимает данные, ищет их в файле соответствующего скрипта"
     with open(path_to_csv+'/DataSet/dataset.csv', mode='r', encoding='utf-8') as csvfile:
         file_reader = csv.reader(csvfile) 
         for row in file_reader:
             if (row[0] == str(date)):  # если одинаковые даты - выводим
-                print(*row)
-                break
+                return row 
         else:
             return None
 
 
-def work_1(date: datetime.date,  path_to_csv: str) -> None:
+def work_1(date: datetime.date,  path_to_csv: str=os.path.join("C:/", "PYTHON", "PythonLab3", "File_folder")) -> str:
     "принимает данные, ищет их в файле соответствующего скрипта"
     with open(path_to_csv +'/scrnipt_1/X.csv', 'r', encoding='utf-8') as csvfile:
         file_reader = list(csv.reader(csvfile))
@@ -52,11 +51,11 @@ def work_1(date: datetime.date,  path_to_csv: str) -> None:
             return None
     with open(path_to_csv+'/scrnipt_1/Y.csv', 'r', encoding='utf-8') as csvfile:
         file_reader = list(csv.reader(csvfile))
-        print(*file_reader[tmp])
+        return str(file_reader[tmp])
 
 
 
-def work_2(date: datetime.date, path_to_csv: str) -> None:
+def work_2(date: datetime.date,  path_to_csv: str=os.path.join("C:/", "PYTHON", "PythonLab3", "File_folder")) -> str:
     "принимает данные, ищет их в файле соответствующего скрипта"
     ways = os.listdir(path_to_csv+"/scrnipt_2")
     date = str(date)
@@ -66,13 +65,12 @@ def work_2(date: datetime.date, path_to_csv: str) -> None:
                 file_reader = csv.reader(csvfile)
                 for row in file_reader:
                     if (row[0] == date):
-                        print(*row)
-                        break
+                        return row
     else:
         return None
 
 
-def work_3(date: datetime.date, path_to_csv: str) -> None:
+def work_3(date: datetime.date,  path_to_csv: str=os.path.join("C:/", "PYTHON", "PythonLab3", "File_folder")) -> str:
     "принимает данные, ищет их в файле соответствующего скрипта"
     ways = os.listdir(path_to_csv+"/scrnipt_3")
     list1 = []
@@ -90,8 +88,7 @@ def work_3(date: datetime.date, path_to_csv: str) -> None:
                 date = re.sub(r'[_]', '-', date)
                 for row in file_reader:
                     if (row[0] == date):
-                        print(*row)
-                        break
+                        return row
     else:
         return None
 

@@ -27,34 +27,38 @@ class Window2(QWidget):                           # <===
         self.b2_1 = QPushButton('Найти данные в файле по дата/данные', self)
         self.b2_1.resize(170, 50)
         self.b2_1.move(40, 100)
-        self.b2_1.clicked.connect(self.date_data)
+        self.b2_1.clicked.connect(lambda: self.date_data(date))
 
         self.b2_2 = QPushButton('Найти данные в файле по годам', self)
         self.b2_2.resize(170, 50)
         self.b2_2.move(40, 150)
-        self.b2_2.clicked.connect(self.sort_week)
+        self.b2_2.clicked.connect(lambda: self.years(date))
 
         self.b2_3 = QPushButton('Найти данные по неделям', self)
         self.b2_3.resize(170, 50)
         self.b2_3.move(40, 200)
-        self.b2_3.clicked.connect(self.sort_week)
+        self.b2_3.clicked.connect(lambda: self.week(date))
 
         self.b2_4 = QPushButton('Найти данные по датасету', self)
         self.b2_4.resize(170, 50)
         self.b2_4.move(40, 250)
-        self.b2_4.clicked.connect(self.sort_week)
+        self.b2_4.clicked.connect(lambda: self.dataset(date))
       
-    def date_data(self):
-        pass
-    def years(self):
-        pass
-    def week(self):
-        pass
-    def dataset(self):
-        pass
+    def date_data(self, date):
+        tmp = scrnipt_4.work_1(date)
+        QMessageBox.about(self, "Информация по дате", f"Дата: {date} \nДанные : {tmp}")
+        
+    def years(self, date):
+        tmp = scrnipt_4.work_2(date)
+        QMessageBox.about(self, "Информация по дате", f"Дата: {date} \nДанные : {tmp}")
 
+    def week(self, date):
+        tmp = scrnipt_4.work_3(date)
+        QMessageBox.about(self, "Информация по дате", f"Дата: {date} \nДанные : {tmp}")
 
-
+    def dataset(self, date):
+        tmp = scrnipt_4.work_0(date)
+        QMessageBox.about(self, "Информация по дате", f"Дата: {date} \nДанные : {tmp}")
 
 
     def closeEvent(self, event):
@@ -103,7 +107,7 @@ class Window(QMainWindow):
         self.b1.setText("Разделение на года")   #добавить подсветку под кнопками
         self.b1.setFixedSize(400, 50)
         self.b1.move(275, 250)
-        self.b1.clicked.connect(self.year)
+        self.b1.clicked.connect(self.sort_year)
 
         self.b2 = QtWidgets.QPushButton(self)
         self.b2.setText("Разделение на недели")
@@ -127,7 +131,7 @@ class Window(QMainWindow):
     def sort_data_date(self) -> None:
         scrnipt_1.run_1()
         QMessageBox.about(self, "data_date", "Данные отсорированны")
-
+        
 
     def sort_week(self) -> None:
         scrnipt_3.run_3()
