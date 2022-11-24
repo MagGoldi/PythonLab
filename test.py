@@ -1,44 +1,36 @@
 import sys
-from PyQt5 import QtGui
-from PyQt5.QtWidgets import (QApplication, QMainWindow, QPushButton, 
-                             QToolTip, QMessageBox, QLabel)
+from PyQt5.QtWidgets import QWidget, QLabel, QPushButton, QLineEdit, QApplication
 
-class Window2(QMainWindow):                           # <===
+class Guitar_2(QWidget):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("Window22222")
+        
+        self.setGeometry(250, 55, 1200, 800)
+        self.setWindowTitle('Гитара')
 
-class Window(QMainWindow):
+        self.First_button = QPushButton('Первая струна(клавиша 1)', self)
+        self.First_button.resize(170, 50)
+        self.First_button.move(40, 100)
+
+class Guitar(QWidget):
     def __init__(self):
         super().__init__()
+        
+        self.setGeometry(250, 55, 1200, 800)
+        self.setWindowTitle('Гитара')
 
-        self.title = "First Window"
-        self.top = 100
-        self.left = 100
-        self.width = 680
-        self.height = 500
+        self.First_button = QPushButton('Первая струна(клавиша 1)', self)
+        self.First_button.resize(170, 50)
+        self.First_button.move(40, 100)
+        self.First_button.clicked.connect(self.show_window_2)
 
-        self.pushButton = QPushButton("Start", self)
-        self.pushButton.move(275, 200)
-        self.pushButton.setToolTip("<h3>Start the Session</h3>")
+    def show_window_2(self):
+        self.w2 = Guitar_2()
+        self.w2.show()
 
-        self.pushButton.clicked.connect(self.window2)              # <===
 
-        self.main_window()
-
-    def main_window(self):
-        self.label = QLabel("Manager", self)
-        self.label.move(285, 175)
-        self.setWindowTitle(self.title)
-        self.setGeometry(self.top, self.left, self.width, self.height)
-        self.show()
-
-    def window2(self):                                             # <===
-        self.w = Window2()
-        self.w.show()
-        self.hide()
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     app = QApplication(sys.argv)
-    window = Window()
-    sys.exit(app.exec())
+    ex = Guitar()
+    ex.show()
+    sys.exit(app.exec_())
