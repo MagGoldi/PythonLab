@@ -16,32 +16,41 @@ import scrnipt_2
 import scrnipt_3
 import scrnipt_4
 
-class Window2(QWidget):                           # <===
+class Window2(QWidget):                           
     def __init__(self, date):
         super().__init__()
-        print(date)
 
-        self.setGeometry(250, 55, 600, 600)
-        self.setWindowTitle('Выбор файла')
+        self.setGeometry(250, 500, 600, 500)
+        self.background_2 = QLabel(self)
+        self.fire = QLabel(self)
+        self.background_2.setGeometry(250, 500, 600, 500)
+        self.background_2.setPixmap(QPixmap("File_folder/bib.png"))
+        self.setWindowTitle('File Selection')
 
-        self.b2_1 = QPushButton('Найти данные в файле по дата/данные', self)
-        self.b2_1.resize(170, 50)
-        self.b2_1.move(40, 100)
+        self.base_2 = QtWidgets.QLabel(self)
+        self.base_2.setFont(QtGui.QFont("Times", 14, QtGui.QFont.Bold))
+        self.base_2.setText("Найти данные в файле по...")
+        self.base_2.move(30, 10) 
+        self.base_2.adjustSize()
+
+        self.b2_1 = QPushButton('Дата/Данные', self)
+        self.b2_1.resize(250, 80)
+        self.b2_1.move(170, 100)
         self.b2_1.clicked.connect(lambda: self.date_data(date))
 
-        self.b2_2 = QPushButton('Найти данные в файле по годам', self)
-        self.b2_2.resize(170, 50)
-        self.b2_2.move(40, 150)
+        self.b2_2 = QPushButton('Годам', self)
+        self.b2_2.resize(250, 80)
+        self.b2_2.move(170, 180)
         self.b2_2.clicked.connect(lambda: self.years(date))
 
-        self.b2_3 = QPushButton('Найти данные по неделям', self)
-        self.b2_3.resize(170, 50)
-        self.b2_3.move(40, 200)
+        self.b2_3 = QPushButton('Неделям', self)
+        self.b2_3.resize(250, 80)
+        self.b2_3.move(170, 260)
         self.b2_3.clicked.connect(lambda: self.week(date))
 
-        self.b2_4 = QPushButton('Найти данные по датасету', self)
-        self.b2_4.resize(170, 50)
-        self.b2_4.move(40, 250)
+        self.b2_4 = QPushButton('Dataset', self)
+        self.b2_4.resize(250, 80)
+        self.b2_4.move(170, 340)
         self.b2_4.clicked.connect(lambda: self.dataset(date))
       
     def date_data(self, date):
@@ -130,31 +139,31 @@ class Window(QMainWindow):
 
     def sort_data_date(self) -> None:
         scrnipt_1.run_1()
-        QMessageBox.about(self, "data_date", "Данные отсорированны")
+        QMessageBox.about(self, "Sort", "Sorting by date")
         
 
     def sort_week(self) -> None:
         scrnipt_3.run_3()
-        QMessageBox.about(self, "week", "Данные отсорированны")
+        QMessageBox.about(self, "Sort", "Sorting by week")
 
 
     def sort_year(self) -> None:
         scrnipt_2.run_2()
-        QMessageBox.about(self, "year", "Данные отсорированны")
+        QMessageBox.about(self, "Sort", "Sorting by year")
 
 
     def input_data(self) -> None:
         text, ok = QInputDialog.getText(self, 'Data',
             'Enter the data in the format dd.mm.yyyy:')
-
+        check = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
         if ok:
-            if (0<=int(text[0:2])<=31 and 0<=int(text[3:5])<=12 and 0<=int(text[6:10])<=3000):
-                date = datetime.date(int(text[6:10]), int(text[3:5]), int(text[0:2]))
-                self.show_window_2(date)
-
-                #self.hide()
+            if type(text) == str and text[0] in check and text[1] in check and text[3] in check and text[4] in check and text[6] in check and text[7] in check and text[8] in check and text[9] in check:
+                if (0<=int(text[0:2])<=31 and 0<=int(text[3:5])<=12 and 2005<=int(text[6:10])<=2030):
+                    date = datetime.date(int(text[6:10]), int(text[3:5]), int(text[0:2]))
+                    self.show_window_2(date)
+                else: QMessageBox.about(self, "warning!", "Вводите реальные даты...")
             else: 
-                QMessageBox.about(self, "Внимание", "Вводите реальные даты...")
+                QMessageBox.about(self, "warning!", "Неправильный формат входных данных...")
 
     def show_window_2(self, date):
         self.w2 = Window2(date)
