@@ -33,7 +33,11 @@ def work_0(date: datetime.date,  path_to_csv: str=os.path.join("C:/", "PYTHON", 
         file_reader = csv.reader(csvfile) 
         for row in file_reader:
             if (row[0] == str(date)):  # если одинаковые даты - выводим
-                return row 
+                tmp = str(row)
+                tmp = tmp.replace("[", "")
+                tmp = tmp.replace("]", "")
+                tmp = tmp.replace("'", "")
+                return tmp
         else:
             return None
 
@@ -45,13 +49,17 @@ def work_1(date: datetime.date,  path_to_csv: str=os.path.join("C:/", "PYTHON", 
         for i in range(len(file_reader)):
             if (file_reader[i][0] == str(
                     date)):  # ищем в фале Х запоминаем номер строки, выводим данные по номеру строки в фале Y
-                tmp = i
+                value = i
                 break
         else:
             return None
     with open(path_to_csv+'/scrnipt_1/Y.csv', 'r', encoding='utf-8') as csvfile:
         file_reader = list(csv.reader(csvfile))
-        return str(file_reader[tmp])
+        tmp = str(file_reader[value])
+        tmp = tmp.replace("[", "")
+        tmp = tmp.replace("]", "")
+        tmp = tmp.replace("'", "")
+        return tmp
 
 
 
@@ -65,7 +73,11 @@ def work_2(date: datetime.date,  path_to_csv: str=os.path.join("C:/", "PYTHON", 
                 file_reader = csv.reader(csvfile)
                 for row in file_reader:
                     if (row[0] == date):
-                        return row
+                        tmp = str(row)
+                        tmp = tmp.replace("[", "")
+                        tmp = tmp.replace("]", "")
+                        tmp = tmp.replace("'", "")
+                        return tmp
     else:
         return None
 
@@ -88,7 +100,11 @@ def work_3(date: datetime.date,  path_to_csv: str=os.path.join("C:/", "PYTHON", 
                 date = re.sub(r'[_]', '-', date)
                 for row in file_reader:
                     if (row[0] == date):
-                        return row
+                        tmp = str(row)
+                        tmp = tmp.replace("[", "")
+                        tmp = tmp.replace("]", "")
+                        tmp = tmp.replace("'", "")
+                        return tmp
     else:
         return None
 
