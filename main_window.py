@@ -19,16 +19,17 @@ import scrnipt_4
 class Window2(QWidget):                           
     def __init__(self, date):
         super().__init__()
+        self.setWindowIcon(QtGui.QIcon('File_folder/polnayapapka.png'))
 
         self.setGeometry(250, 500, 600, 500)
         self.background_2 = QLabel(self)
         self.fire = QLabel(self)
-        self.background_2.setGeometry(250, 500, 600, 500)
-        self.background_2.setPixmap(QPixmap("File_folder/bib.png"))
+        self.background_2.setGeometry(-50, -100, 1007, 925)
+        self.background_2.setPixmap(QPixmap("File_folder/cat.png"))
         self.setWindowTitle('File Selection')
 
         self.base_2 = QtWidgets.QLabel(self)
-        self.base_2.setFont(QtGui.QFont("Times", 14, QtGui.QFont.Bold))
+        self.base_2.setFont(QtGui.QFont("Times", 14, QtGui.QFont.Light))
         self.base_2.setText("Найти данные в файле по...")
         self.base_2.move(30, 10) 
         self.base_2.adjustSize()
@@ -91,14 +92,15 @@ class Window(QMainWindow):
     def initUI(self):
 
         super(Window, self).__init__()
+        self.setWindowIcon(QtGui.QIcon('File_folder/cloud.png'))
 
-        self.setGeometry(800, 300, 1000, 900)
+        self.setGeometry(800, 300, 900, 900)
         self.setFixedSize(920, 800)
         self.setWindowTitle("Weather data")
         self.background = QLabel(self)
         self.fire = QLabel(self)
-        self.background.setGeometry(0, 0, 1007, 925)
-        self.background.setPixmap(QPixmap("File_folder/bluee.png"))
+        self.background.setGeometry(0, 0, 1000, 900)
+        self.background.setPixmap(QPixmap("File_folder/bib.png"))
 
         self.base = QtWidgets.QLabel(self)
         self.base.setFont(QtGui.QFont("Times", 14, QtGui.QFont.Bold))
