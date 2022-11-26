@@ -2,10 +2,8 @@ import sys
 import PyQt5
 import datetime
 from PyQt5 import QtWidgets, QtGui
-from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QMessageBox, QLineEdit
-from PyQt5.QtWidgets import QWidget, QLabel, QPushButton, QLineEdit, QApplication
-from PyQt5.QtGui import QPixmap, QFont, QIcon
-from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QMessageBox, QWidget, QPushButton
+from PyQt5.QtGui import QPixmap
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
@@ -159,7 +157,7 @@ class Window(QMainWindow):
             'Enter the data in the format dd.mm.yyyy:')
         check = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
         if ok:
-            if type(text) == str and text[0] in check and text[1] in check and text[3] in check and text[4] in check and text[6] in check and text[7] in check and text[8] in check and text[9] in check:
+            if type(text) == str and text[0] in check and text[1] in check and text[3] in check and text[4] in check and text[6] in check and text[7] in check and text[8] in check and text[9] in check:   #баг 
                 if (0<=int(text[0:2])<=31 and 0<=int(text[3:5])<=12 and 2005<=int(text[6:10])<=2030):
                     date = datetime.date(int(text[6:10]), int(text[3:5]), int(text[0:2]))
                     self.show_window_2(date)
