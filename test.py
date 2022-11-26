@@ -1,5 +1,4 @@
-import re
-
-test = [[1], [2], ["ку re"]]
-print(len(test[2]))
-print(test[2][0])
+st1 = None
+print(type(type(st1)))
+if (type(st1) == str): print("YES")
+else: print("NO")
