@@ -1,13 +1,9 @@
 import sys
-import PyQt5
 import datetime
-from PyQt5 import QtWidgets, QtGui
-from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QMessageBox, QWidget, QPushButton
-from PyQt5.QtGui import QPixmap
-from PyQt5.QtCore import *
-from PyQt5.QtGui import *
-from PyQt5.QtWidgets import *
 
+from PyQt5 import QtWidgets, QtGui
+from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QMessageBox, QWidget, QPushButton, QInputDialog
+from PyQt5.QtGui import QPixmap
 
 import scrnipt_1
 import scrnipt_2
