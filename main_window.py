@@ -15,7 +15,8 @@ import scrnipt_3
 import scrnipt_4
 
 class Window2(QWidget):                           
-    def __init__(self, date):
+    def __init__(self, date: datetime.date) -> None:
+        """designer class Window2"""
         super().__init__()
         self.setWindowIcon(QtGui.QIcon('File_folder/polnayapapka.png'))
 
@@ -52,25 +53,29 @@ class Window2(QWidget):
         self.b2_4.move(170, 340)
         self.b2_4.clicked.connect(lambda: self.dataset(date))
       
-    def date_data(self, date):
+    def date_data(self, date: datetime.date)-> None:
+        """function search data in file date/data"""
         tmp = scrnipt_4.work_1(date)
         QMessageBox.about(self, "Информация по дате", f"Дата: {date} \nДанные : {tmp}")
         
-    def years(self, date):
+    def years(self, date: datetime.date)-> None:
+        """"function search data in file years"""
         tmp = scrnipt_4.work_2(date)
         QMessageBox.about(self, "Информация по дате", f"Дата: {date} \nДанные : {tmp}")
 
-    def week(self, date):
+    def week(self, date: datetime.date)-> None:
+        """function search data in file week"""
         tmp = scrnipt_4.work_3(date)
         QMessageBox.about(self, "Информация по дате", f"Дата: {date} \nДанные : {tmp}")
 
-    def dataset(self, date):
+    def dataset(self, date: datetime.date)-> None:
+        """function search data in file dateset"""
         tmp = scrnipt_4.work_0(date)
         QMessageBox.about(self, "Информация по дате", f"Дата: {date} \nДанные : {tmp}")
 
 
-    def closeEvent(self, event):
-
+    def closeEvent(self, event)-> None:
+        """function calling window question exit"""
         reply = QMessageBox.question(self, 'Message',
             "Are you sure to quit?", QMessageBox.Yes |
             QMessageBox.No, QMessageBox.No)
@@ -82,12 +87,14 @@ class Window2(QWidget):
 
 class Window(QMainWindow):
 
-    def __init__(self):
+    def __init__(self)-> None:
+        """designer class Window"""
         super().__init__()
         self.initUI()
 
 
-    def initUI(self):
+    def initUI(self)-> None:
+        "main functions work class Window"
 
         super(Window, self).__init__()
         self.setWindowIcon(QtGui.QIcon('File_folder/cloud.png'))
@@ -138,21 +145,25 @@ class Window(QMainWindow):
 
 
     def sort_data_date(self) -> None:
+        """sorting function by data/date"""
         scrnipt_1.run_1()
         QMessageBox.about(self, "Sort", "Sorting by date")
         
 
     def sort_week(self) -> None:
+        """sorting function by week"""
         scrnipt_3.run_3()
         QMessageBox.about(self, "Sort", "Sorting by week")
 
 
     def sort_year(self) -> None:
+        """sorting function by year"""
         scrnipt_2.run_2()
         QMessageBox.about(self, "Sort", "Sorting by year")
 
 
     def input_data(self) -> None:
+        """a function that accepts a date and checks it for correctness"""
         text, ok = QInputDialog.getText(self, 'Data',
             'Enter the data in the format dd.mm.yyyy:')
         check = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
@@ -165,11 +176,13 @@ class Window(QMainWindow):
             else: 
                 QMessageBox.about(self, "warning!", "Неправильный формат входных данных...")
 
-    def show_window_2(self, date):
+    def show_window_2(self, date: datetime.date)-> None:
+        """function calling window 2"""
         self.w2 = Window2(date)
         self.w2.show()
 
-    def closeEvent(self, event):
+    def closeEvent(self, event)-> None:
+        """function calling window question exit"""
 
         reply = QMessageBox.question(self, 'Message',
             "Are you sure to quit?", QMessageBox.Yes |
@@ -180,7 +193,8 @@ class Window(QMainWindow):
         else:
             event.ignore()
 
-def application():
+def application()-> None:
+    """functions showing window"""
     app = QApplication(sys.argv)
     w = Window()
     w.show()
