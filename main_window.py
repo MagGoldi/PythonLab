@@ -10,7 +10,8 @@ import scrnipt_2
 import scrnipt_3
 import scrnipt_4
 
-class Window2(QWidget):                           
+
+class Window2(QWidget):
     def __init__(self, date: datetime.date) -> None:
         """designer class Window2"""
         super().__init__()
@@ -26,7 +27,7 @@ class Window2(QWidget):
         self.base_2 = QtWidgets.QLabel(self)
         self.base_2.setFont(QtGui.QFont("Times", 14, QtGui.QFont.Light))
         self.base_2.setText("Найти данные в файле по...")
-        self.base_2.move(30, 10) 
+        self.base_2.move(30, 10)
         self.base_2.adjustSize()
 
         self.b2_1 = QPushButton('Дата/Данные', self)
@@ -48,48 +49,47 @@ class Window2(QWidget):
         self.b2_4.resize(250, 80)
         self.b2_4.move(170, 340)
         self.b2_4.clicked.connect(lambda: self.dataset(date))
-      
-    def date_data(self, date: datetime.date)-> None:
+
+    def date_data(self, date: datetime.date) -> None:
         """function search data in file date/data"""
         tmp = scrnipt_4.work_1(date)
         QMessageBox.about(self, "Информация по дате", f"Дата: {date} \nДанные : {tmp}")
-        
-    def years(self, date: datetime.date)-> None:
+
+    def years(self, date: datetime.date) -> None:
         """"function search data in file years"""
         tmp = scrnipt_4.work_2(date)
         QMessageBox.about(self, "Информация по дате", f"Дата: {date} \nДанные : {tmp}")
 
-    def week(self, date: datetime.date)-> None:
+    def week(self, date: datetime.date) -> None:
         """function search data in file week"""
         tmp = scrnipt_4.work_3(date)
         QMessageBox.about(self, "Информация по дате", f"Дата: {date} \nДанные : {tmp}")
 
-    def dataset(self, date: datetime.date)-> None:
+    def dataset(self, date: datetime.date) -> None:
         """function search data in file dateset"""
         tmp = scrnipt_4.work_0(date)
         QMessageBox.about(self, "Информация по дате", f"Дата: {date} \nДанные : {tmp}")
 
-
-    def closeEvent(self, event)-> None:
+    def closeEvent(self, event) -> None:
         """function calling window question exit"""
         reply = QMessageBox.question(self, 'Message',
-            "Are you sure to quit?", QMessageBox.Yes |
-            QMessageBox.No, QMessageBox.No)
+                                     "Are you sure to quit?", QMessageBox.Yes |
+                                     QMessageBox.No, QMessageBox.No)
 
         if reply == QMessageBox.Yes:
             event.accept()
         else:
             event.ignore()
 
+
 class Window(QMainWindow):
 
-    def __init__(self)-> None:
+    def __init__(self) -> None:
         """designer class Window"""
         super().__init__()
         self.initUI()
 
-
-    def initUI(self)-> None:
+    def initUI(self) -> None:
         "main functions work class Window"
 
         super(Window, self).__init__()
@@ -106,7 +106,7 @@ class Window(QMainWindow):
         self.base = QtWidgets.QLabel(self)
         self.base.setFont(QtGui.QFont("Times", 14, QtGui.QFont.Bold))
         self.base.setText("Создание и выбор аннотаций")
-        self.base.move(220, 10) 
+        self.base.move(220, 10)
         self.base.adjustSize()
 
         self.folderpath_dataset = ""
@@ -116,7 +116,7 @@ class Window(QMainWindow):
             )
 
         self.b1 = QtWidgets.QPushButton(self)
-        self.b1.setText("Разделение на года")   #добавить подсветку под кнопками
+        self.b1.setText("Разделение на года")  # добавить подсветку под кнопками
         self.b1.setFixedSize(400, 50)
         self.b1.move(275, 250)
         self.b1.clicked.connect(self.sort_year)
@@ -139,57 +139,56 @@ class Window(QMainWindow):
         self.b4.move(275, 500)
         self.b4.clicked.connect(self.input_data)
 
-
     def sort_data_date(self) -> None:
         """sorting function by data/date"""
         scrnipt_1.run_1()
         QMessageBox.about(self, "Sort", "Sorting by date")
-        
 
     def sort_week(self) -> None:
         """sorting function by week"""
         scrnipt_3.run_3()
         QMessageBox.about(self, "Sort", "Sorting by week")
 
-
     def sort_year(self) -> None:
         """sorting function by year"""
         scrnipt_2.run_2()
         QMessageBox.about(self, "Sort", "Sorting by year")
 
-
     def input_data(self) -> None:
         """a function that accepts a date and checks it for correctness"""
         text, ok = QInputDialog.getText(self, 'Data',
-            'Enter the data in the format dd.mm.yyyy:')
+                                        'Enter the data in the format dd.mm.yyyy:')
         check = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
         if ok:
-            if type(text) == str and text[0] in check and text[1] in check and text[3] in check and text[4] in check and text[6] in check and text[7] in check and text[8] in check and text[9] in check:   #баг 
-                if (0<=int(text[0:2])<=31 and 0<=int(text[3:5])<=12 and 2005<=int(text[6:10])<=2030):
+            if type(text) == str and text[0] in check and text[1] in check and text[3] in check and text[4] in check and \
+                    text[6] in check and text[7] in check and text[8] in check and text[9] in check:  # баг 
+                if (0 <= int(text[0:2]) <= 31 and 0 <= int(text[3:5]) <= 12 and 2005 <= int(text[6:10]) <= 2030):
                     date = datetime.date(int(text[6:10]), int(text[3:5]), int(text[0:2]))
                     self.show_window_2(date)
-                else: QMessageBox.about(self, "warning!", "Вводите реальные даты...")
-            else: 
+                else:
+                    QMessageBox.about(self, "warning!", "Вводите реальные даты...")
+            else:
                 QMessageBox.about(self, "warning!", "Неправильный формат входных данных...")
 
-    def show_window_2(self, date: datetime.date)-> None:
+    def show_window_2(self, date: datetime.date) -> None:
         """function calling window 2"""
         self.w2 = Window2(date)
         self.w2.show()
 
-    def closeEvent(self, event)-> None:
+    def closeEvent(self, event) -> None:
         """function calling window question exit"""
 
         reply = QMessageBox.question(self, 'Message',
-            "Are you sure to quit?", QMessageBox.Yes |
-            QMessageBox.No, QMessageBox.No)
+                                     "Are you sure to quit?", QMessageBox.Yes |
+                                     QMessageBox.No, QMessageBox.No)
 
         if reply == QMessageBox.Yes:
             event.accept()
         else:
             event.ignore()
 
-def application()-> None:
+
+def application() -> None:
     """functions showing window"""
     app = QApplication(sys.argv)
     w = Window()
