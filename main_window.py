@@ -25,9 +25,10 @@ class Window2(QWidget):
         self.setWindowTitle('File Selection')
 
         self.base_2 = QtWidgets.QLabel(self)
-        self.base_2.setFont(QtGui.QFont("Times", 14, QtGui.QFont.Light))
+        self.base_2.setFont(QtGui.QFont("Times", 11, QtGui.QFont.Light))
         self.base_2.setText("Найти данные в файле по...")
-        self.base_2.move(30, 10)
+        self.base_2.move(100, 10)
+        self.base_2.setStyleSheet("background-color: white; border: 1px solid black;")
         self.base_2.adjustSize()
 
         self.b2_1 = QPushButton('Дата/Данные', self)
@@ -106,7 +107,7 @@ class Window(QMainWindow):
         self.base = QtWidgets.QLabel(self)
         self.base.setFont(QtGui.QFont("Times", 14, QtGui.QFont.Bold))
         self.base.setText("Создание и выбор аннотаций")
-        self.base.move(220, 10)
+        self.base.move(190, 10)
         self.base.adjustSize()
 
         self.folderpath_dataset = ""
@@ -160,16 +161,15 @@ class Window(QMainWindow):
                                         'Enter the data in the format dd.mm.yyyy:')
         check = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
         if ok:
-            if type(text) == str and text[0] in check and text[1] in check and text[3] in check and text[4] in check and \
-                    text[6] in check and text[7] in check and text[8] in check and text[9] in check:  # баг 
-                if (0 <= int(text[0:2]) <= 31 and 0 <= int(text[3:5]) <= 12 and 2005 <= int(text[6:10]) <= 2030):
-                    date = datetime.date(int(text[6:10]), int(text[3:5]), int(text[0:2]))
-                    self.show_window_2(date)
-                else:
-                    QMessageBox.about(self, "warning!", "Вводите реальные даты...")
-            else:
-                QMessageBox.about(self, "warning!", "Неправильный формат входных данных...")
-
+            if len(text) == 10:
+                if text[0] in check and text[1] in check and text[3] in check and text[4] in check and \
+                        text[6] in check and text[7] in check and text[8] in check and text[9] in check:  # баг 
+                    if (0 <= int(text[0:2]) <= 31 and 0 <= int(text[3:5]) <= 12 and 2005 <= int(text[6:10]) <= 2030):
+                        date = datetime.date(int(text[6:10]), int(text[3:5]), int(text[0:2]))
+                        self.show_window_2(date)
+                    else: QMessageBox.about(self, "warning!", "Вводите реальные даты...")
+                else: QMessageBox.about(self, "warning!", "Неправильный формат входных данных...")
+            else:  QMessageBox.about(self, "warning!", "Неправильный формат входных данных...")
     def show_window_2(self, date: datetime.date) -> None:
         """function calling window 2"""
         self.w2 = Window2(date)
