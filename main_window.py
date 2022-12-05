@@ -1,5 +1,6 @@
 import sys
 import datetime
+import os
 
 from PyQt5 import QtWidgets, QtGui
 from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QMessageBox, QWidget, QPushButton, QInputDialog
@@ -12,16 +13,16 @@ import scrnipt_4
 
 
 class Window2(QWidget):
-    def __init__(self, date: datetime.date) -> None:
+    def __init__(self, date: datetime.date, path_to_csv: os.path ) -> None:
         """designer class Window2"""
         super().__init__()
-        self.setWindowIcon(QtGui.QIcon('File_folder/polnayapapka.png'))
+        self.setWindowIcon(QtGui.QIcon(path_to_csv + '/polnayapapka.png'))
 
         self.setGeometry(250, 500, 600, 500)
         self.background_2 = QLabel(self)
         self.fire = QLabel(self)
         self.background_2.setGeometry(-50, -100, 1007, 925)
-        self.background_2.setPixmap(QPixmap("File_folder/cat.png"))
+        self.background_2.setPixmap(QPixmap(path_to_csv + "/cat.png"))
         self.setWindowTitle('File Selection')
 
         self.base_2 = QtWidgets.QLabel(self)
@@ -92,9 +93,9 @@ class Window(QMainWindow):
 
     def initUI(self) -> None:
         "main functions work class Window"
-
+        path_to_csv = os.path.join("C:/", "PYTHON", "PythonLab3", "File_folder")
         super(Window, self).__init__()
-        self.setWindowIcon(QtGui.QIcon('File_folder/cloud.png'))
+        self.setWindowIcon(QtGui.QIcon(path_to_csv+'/cloud.png'))
 
         self.setGeometry(800, 300, 900, 900)
         self.setFixedSize(920, 800)
@@ -102,7 +103,7 @@ class Window(QMainWindow):
         self.background = QLabel(self)
         self.fire = QLabel(self)
         self.background.setGeometry(0, 0, 1000, 900)
-        self.background.setPixmap(QPixmap("File_folder/bib.png"))
+        self.background.setPixmap(QPixmap(path_to_csv+"/bib.png"))
 
         self.base = QtWidgets.QLabel(self)
         self.base.setFont(QtGui.QFont("Times", 14, QtGui.QFont.Bold))
@@ -155,24 +156,33 @@ class Window(QMainWindow):
         scrnipt_2.run_2()
         QMessageBox.about(self, "Sort", "Sorting by year")
 
+    def check_date(self, text: str) -> bool:
+        Flag = False
+        check, check_value = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"], ["0", "1", "3", "4", "6", "7", "8", "9"]
+        if  len(text) != 10: return False
+        for i in range(len(check_value)):
+            for j in range(len(check)):  
+                if text[int(check_value[i])] == check[j]: Flag = True
+            if Flag == False: return False    
+        if (0 <= int(text[0:2]) <= 31 and 0 <= int(text[3:5]) <= 12 and 2005 <= int(text[6:10]) <= 2030): return True
+        else: return False
+
     def input_data(self) -> None:
         """a function that accepts a date and checks it for correctness"""
         text, ok = QInputDialog.getText(self, 'Data',
                                         'Enter the data in the format dd.mm.yyyy:')
-        check = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
+        dictionary = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
         if ok:
-            if len(text) == 10:
-                if text[0] in check and text[1] in check and text[3] in check and text[4] in check and \
-                        text[6] in check and text[7] in check and text[8] in check and text[9] in check:  # баг 
-                    if (0 <= int(text[0:2]) <= 31 and 0 <= int(text[3:5]) <= 12 and 2005 <= int(text[6:10]) <= 2030):
-                        date = datetime.date(int(text[6:10]), int(text[3:5]), int(text[0:2]))
-                        self.show_window_2(date)
-                    else: QMessageBox.about(self, "warning!", "Вводите реальные даты...")
-                else: QMessageBox.about(self, "warning!", "Неправильный формат входных данных...")
+            if self.check_date(text) == True:
+                        if  int(text[0:2])<=dictionary[int(text[3:5])-1]:
+                            date = datetime.date(int(text[6:10]), int(text[3:5]), int(text[0:2]))
+                            self.show_window_2(date)
+                        else:  QMessageBox.about(self, "warning!", "Неправильные данные...")    
             else:  QMessageBox.about(self, "warning!", "Неправильный формат входных данных...")
+
     def show_window_2(self, date: datetime.date) -> None:
         """function calling window 2"""
-        self.w2 = Window2(date)
+        self.w2 = Window2(date, path_to_csv = os.path.join("C:/", "PYTHON", "PythonLab3", "File_folder"))
         self.w2.show()
 
     def closeEvent(self, event) -> None:
